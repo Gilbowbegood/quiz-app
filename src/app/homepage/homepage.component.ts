@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
-import { TriviaCategoriesEntity } from '../interface/category.interface';
+import { ITriviaCategoriesEntity } from '../interface/category.interface';
 import { QuestionService } from '../services/question.service';
-import { map, switchMap, tap, toArray } from 'rxjs/operators';
-import { Answer, ResultsEntity } from '../interface/question.interface';
+import { switchMap, tap, toArray } from 'rxjs/operators';
+import { IAnswer, IResultsEntity } from '../interface/question.interface';
 
 @Component({
   selector: 'app-homepage',
@@ -12,11 +12,12 @@ import { Answer, ResultsEntity } from '../interface/question.interface';
 })
 export class HomepageComponent implements OnInit {
 
-  categoryList: TriviaCategoriesEntity[] = [];
+  categoryList: ITriviaCategoriesEntity[] = [];
 
-  questions : ResultsEntity[] = [];
+  questions : IResultsEntity[] = [];
 
   categorySelected: number = 0;
+
   difficultySelected: string = '';
 
   constructor(
@@ -45,7 +46,7 @@ export class HomepageComponent implements OnInit {
     this._questionService.getQuestion(this.categorySelected, this.difficultySelected).pipe(
       switchMap(({ results }) => results),
       tap(item => {
-        let answers: Answer[] = [];
+        let answers: IAnswer[] = [];
         item.incorrect_answers.forEach(x => {
           answers.push({isCorrect: false, value: x, isClicked: false})
         })

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Answer, Question } from '../interface/question.interface';
+import { IAnswer, IQuestion } from '../interface/question.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class QuestionService {
     private httpClient: HttpClient
   ) { }
 
-  getQuestion(categoryId: number, difficulty: string): Observable<Question>{
+  getQuestion(categoryId: number, difficulty: string): Observable<IQuestion>{
     const option = {
       params: {
         amount: 5,
@@ -24,10 +24,10 @@ export class QuestionService {
       }
     }
 
-    return this.httpClient.get<Question>(this.apiUrl, option);
+    return this.httpClient.get<IQuestion>(this.apiUrl, option);
   }
 
-  shuffle(array: Array<Answer>) {
+  shuffle(array: Array<IAnswer>) {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
       [array[i], array[j]] = [array[j], array[i]];

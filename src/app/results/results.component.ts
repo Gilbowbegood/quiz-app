@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResultsEntity } from '../interface/question.interface';
+import { IResultsEntity } from '../interface/question.interface';
 import { QUESTION_KEY } from '../shared/constants';
 
 @Component({
@@ -9,7 +9,7 @@ import { QUESTION_KEY } from '../shared/constants';
 })
 export class ResultsComponent implements OnInit {
 
-  questions : ResultsEntity[] = [];
+  questions : IResultsEntity[] = [];
 
   counter: number = 0;
 

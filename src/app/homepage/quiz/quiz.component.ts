@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ResultsEntity } from 'src/app/interface/question.interface';
+import { IResultsEntity } from 'src/app/interface/question.interface';
 import { QUESTION_KEY } from 'src/app/shared/constants';
 
 @Component({
@@ -10,7 +10,7 @@ import { QUESTION_KEY } from 'src/app/shared/constants';
 })
 export class QuizComponent implements OnInit {
 
-  @Input() questions : ResultsEntity[] = []
+  @Input() questions : IResultsEntity[] = []
 
   givenAnswers: Map<string, string> = new Map();
   

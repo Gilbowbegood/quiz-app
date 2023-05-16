@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from '../interface/category.interface';
+import { ICategory } from '../interface/category.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class CategoryService {
     private httpClient: HttpClient
   ) { }
 
-  getCategoriesList(): Observable<Category> {
-    return this.httpClient.get<Category>(this.apiUrl);
+  getCategoriesList(): Observable<ICategory> {
+    return this.httpClient.get<ICategory>(this.apiUrl);
   }
 }

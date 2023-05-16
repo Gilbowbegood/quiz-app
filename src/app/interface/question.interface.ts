@@ -1,19 +1,19 @@
-export interface Question {
+export interface IQuestion {
   response_code: number;
-  results: ResultsEntity[];
+  results: IResultsEntity[];
 }
 
-export interface ResultsEntity {
+export interface IResultsEntity {
   category: string;
   type: string;
   difficulty: string;
   question: string;
   correct_answer: string;
   incorrect_answers: string[];
-  answers: Answer[];
+  answers: IAnswer[];
 }
 
-export interface Answer {
+export interface IAnswer {
   isCorrect: boolean;
   value: string;
   isClicked: boolean;

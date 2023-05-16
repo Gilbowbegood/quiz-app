@@ -1,8 +1,8 @@
-export interface Category {
-  trivia_categories: TriviaCategoriesEntity[];
+export interface ICategory {
+  trivia_categories: ITriviaCategoriesEntity[];
 }
 
-export interface TriviaCategoriesEntity {
+export interface ITriviaCategoriesEntity {
   id: number;
   name: string;
 }
