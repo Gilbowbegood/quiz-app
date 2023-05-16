@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
 import { TriviaCategoriesEntity } from '../interface/category.interface';
 import { QuestionService } from '../services/question.service';
-import { map, tap } from 'rxjs/operators';
+import { map, switchMap, tap, toArray } from 'rxjs/operators';
 import { Answer, ResultsEntity } from '../interface/question.interface';
 
 @Component({
@@ -43,19 +43,18 @@ export class HomepageComponent implements OnInit {
 
   createQuiz(): void {
     this._questionService.getQuestion(this.categorySelected, this.difficultySelected).pipe(
-      map(response => response.results),
-      tap(results => {
-        results.forEach(item => {
-          let answers: Answer[] = [];
-          item.incorrect_answers.forEach(x => {
-            answers.push({isCorrect: false, value: x, isClicked: false})
-          })
-          answers.push({isCorrect: true, value: item.correct_answer, isClicked: false})
-          item.answers = answers;
-          this._questionService.shuffle(item.answers);
+      switchMap(({ results }) => results),
+      tap(item => {
+        let answers: Answer[] = [];
+        item.incorrect_answers.forEach(x => {
+          answers.push({isCorrect: false, value: x, isClicked: false})
         })
-        this.questions = results;
+        answers.push({isCorrect: true, value: item.correct_answer, isClicked: false})
+        item.answers = answers;
+        this._questionService.shuffle(item.answers);
       }),
+      toArray(),
+      tap(results => this.questions = results)
     ).subscribe();
   }
 

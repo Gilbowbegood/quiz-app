@@ -25,12 +25,7 @@ export class QuizComponent implements OnInit {
   saveAnswer(question: string, answer: string, questionIndex: number, answerIndex: number): void{
     this.givenAnswers.set(question, answer);
     this.questions[questionIndex].answers.forEach((x, index) => {
-      if(index === answerIndex) {
-        x.isClicked = true;
-      }
-      else {
-        x.isClicked = false;
-      }
+      x.isClicked = index === answerIndex;
     })
   }
 
