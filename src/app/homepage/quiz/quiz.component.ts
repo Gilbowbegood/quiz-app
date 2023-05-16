@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { IResultsEntity } from 'src/app/interface/question.interface';
 import { QUESTION_KEY } from 'src/app/shared/constants';
@@ -8,7 +8,7 @@ import { QUESTION_KEY } from 'src/app/shared/constants';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnChanges {
 
   @Input() questions : IResultsEntity[] = []
 
@@ -20,6 +20,12 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.questions.currentValue != changes.questions.previousValue) {
+      this.givenAnswers.clear();
+    }
   }
 
   saveAnswer(question: string, answer: string, questionIndex: number, answerIndex: number): void{
