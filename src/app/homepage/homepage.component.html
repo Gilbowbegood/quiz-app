@@ -34,31 +34,4 @@
   </div>
 </div>
 
-<div class="container mt-4">
-  <ng-container *ngFor="let question of questions; let questionIndex = index">
-    <h5 class="mt-2" [innerHTML]="question.question"><br></h5>
-    <div class="justify-content-between">
-      <button *ngFor="let answer of question.answers; let answerIndex = index"
-        type="button"
-        class="btn btn-outline-success"
-        [innerHTML]="answer.value"
-        [ngClass]="{
-          'active': answer.isClicked ? true : false
-        }"
-        [ngStyle]="{
-          'margin-right': '8px'
-        }"
-        (click)="saveAnswer(question.question, answer.value, questionIndex, answerIndex);">
-      </button>
-    </div>
-  </ng-container>
-</div>
-
-<div *ngIf="numberOfQuestions === givenAnswers.size && numberOfQuestions != 0" class="container text-center">
-  <button 
-    type="button" 
-    class="btn btn-outline-success mt-3 mb-3"
-    (click)="goToResults()">
-    submit
-  </button>
-</div>
+<app-quiz [questions]="questions"></app-quiz>

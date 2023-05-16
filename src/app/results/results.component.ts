@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultsEntity } from '../interface/question.interface';
+import { QUESTION_KEY } from '../shared/constants';
 
 @Component({
   selector: 'app-results',
@@ -15,8 +16,8 @@ export class ResultsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(sessionStorage.getItem('questions')) {
-      this.questions = JSON.parse(sessionStorage.getItem('questions') as string);
+    if(sessionStorage.getItem(QUESTION_KEY)) {
+      this.questions = JSON.parse(sessionStorage.getItem(QUESTION_KEY) as string);
     }
 
     this.calculateFinalScore();
